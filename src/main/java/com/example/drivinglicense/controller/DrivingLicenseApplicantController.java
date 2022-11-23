@@ -6,6 +6,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,33 +18,24 @@ import com.example.drivinglicense.mapper.ApplicantMapper;
 import com.example.drivinglicense.model.Applicant;
 import com.example.drivinglicense.model.RequestDTO;
 import com.example.drivinglicense.repository.ApplicationRepository;
-import com.example.drivinglicense.service.ApplicantService;
+import com.example.drivinglicense.service.ApplicantServiceImpl;
 
 @RestController
 @RequestMapping("/applicant")
 public class DrivingLicenseApplicantController {
 	
 	@Autowired
-	ApplicantService applicantService;
+	ApplicantServiceImpl applicantService;
 	
-	@GetMapping()
-	public ApplicantDTO getApplicant(@RequestParam String email) {
-		System.out.println("Triggered with param email : " + email);
+	@GetMapping("/{email}")
+	public ApplicantDTO getApplicant(@PathVariable String email) {
 		return applicantService.getApplicant(email);
-	}
-	
-	@GetMapping("/query")
-	public Applicant getApplicantFP(@RequestParam String firstName, @RequestParam Long phone, @RequestParam String email) {
-		System.out.println("Triggered with param : " + firstName + " " + phone);
-		return applicantService.getApplicantFP(firstName, phone,email);
 	}
 	
 	@PostMapping()
 	public String createApplicant(@RequestBody ApplicantDTO applicantDTO) {
-		ApplicantMapper mapper = Mappers.getMapper(ApplicantMapper.class);
 		
-		Applicant newApplicant = mapper.getApplicant(applicantDTO);
-		return applicantService.createApplicant(newApplicant);
+		return applicantService.createApplicant(applicantDTO);
 	}
 	
 	@PatchMapping("/update-applincat")
