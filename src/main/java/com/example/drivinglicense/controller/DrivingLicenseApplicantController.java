@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.drivinglicense.dto.ApplicantDTO;
-import com.example.drivinglicense.mapper.ApplicantMapper;
-import com.example.drivinglicense.model.Applicant;
 import com.example.drivinglicense.model.RequestDTO;
-import com.example.drivinglicense.repository.ApplicationRepository;
 import com.example.drivinglicense.service.ApplicantServiceImpl;
 
 @RestController
@@ -36,7 +32,7 @@ public class DrivingLicenseApplicantController {
 	
 	//Get user using their email
 	@GetMapping("/{email}")
-	public ApplicantDTO getApplicant(@PathVariable String email) {
+	public Object getApplicant(@PathVariable String email) {
 		return applicantService.getApplicant(email);
 	}
 	
