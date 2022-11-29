@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,32 +28,39 @@ public class DrivingLicenseApplicantController {
 	@Autowired
 	ApplicantServiceImpl applicantService;
 	
+	//Get last n created users
+	@GetMapping()
+	public List<ApplicantDTO> getApplicants(Integer n){
+		return null;
+	}
+	
+	//Get user using their email
 	@GetMapping("/{email}")
 	public ApplicantDTO getApplicant(@PathVariable String email) {
 		return applicantService.getApplicant(email);
 	}
 	
+	//Create applicant
 	@PostMapping()
 	public String createApplicant(@RequestBody ApplicantDTO applicantDTO) {
-		
 		return applicantService.createApplicant(applicantDTO);
 	}
 	
+	//Update applicant
 	@PatchMapping("/update-applincat")
 	public ApplicantDTO updateApplicant(@RequestBody ApplicantDTO applicantDTO) {
 		return applicantService.updateApplicant(applicantDTO);
 		
 	}
 	
-	@GetMapping("/pending-document-number")
-	public List<ApplicantDTO> getApplicantsWithoutDocumentNumber(){
-		return applicantService.getApplicantsWithoutDocNum();
-	}
-	
+	//Create application for applicant
 	@PostMapping("/application")
 	public void submitApplicantWithApplication(@RequestBody RequestDTO request) {
-		
 		applicantService.submit(request);
-		
+	}
+	
+	@DeleteMapping("/remove/{email}")
+	public void deleteApplicant(@PathVariable String email) {
+	
 	}
 }
