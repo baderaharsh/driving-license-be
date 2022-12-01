@@ -2,7 +2,6 @@ package com.example.drivinglicense.controller;
 
 import java.util.List;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.drivinglicense.dto.ApplicantDTO;
-import com.example.drivinglicense.model.RequestDTO;
-import com.example.drivinglicense.service.ApplicantServiceImpl;
+import com.example.drivinglicense.dto.ApplicantRequestDTO;
+import com.example.drivinglicense.dto.ApplicantResponseDTO;
+import com.example.drivinglicense.dto.ApplicantWithApplicationRequestDTO;
+import com.example.drivinglicense.dto.ApplicantWithApplicationResponseDTO;
+import com.example.drivinglicense.service.ApplicantService;
 
 @RestController
 @RequestMapping("/applicant")
 public class DrivingLicenseApplicantController {
 	
 	@Autowired
-	ApplicantServiceImpl applicantService;
+	ApplicantService applicantService;
 	
 	//Get last n created users
 	@GetMapping()
-	public List<ApplicantDTO> getApplicants(Integer n){
+	public List<ApplicantRequestDTO> getApplicants(Integer n){
 		return null;
 	}
 	
@@ -38,25 +39,25 @@ public class DrivingLicenseApplicantController {
 	
 	//Create applicant
 	@PostMapping()
-	public String createApplicant(@RequestBody ApplicantDTO applicantDTO) {
+	public ApplicantResponseDTO createApplicant(@RequestBody ApplicantRequestDTO applicantDTO) {
 		return applicantService.createApplicant(applicantDTO);
 	}
 	
 	//Update applicant
 	@PatchMapping("/update-applincat")
-	public ApplicantDTO updateApplicant(@RequestBody ApplicantDTO applicantDTO) {
+	public ApplicantResponseDTO updateApplicant(@RequestBody ApplicantRequestDTO applicantDTO) {
 		return applicantService.updateApplicant(applicantDTO);
 		
 	}
 	
 	//Create application for applicant
-	@PostMapping("/application")
-	public void submitApplicantWithApplication(@RequestBody RequestDTO request) {
-		applicantService.submit(request);
+	@PostMapping("/applicant/application")
+	public ApplicantWithApplicationResponseDTO submitApplicantWithApplication(@RequestBody ApplicantWithApplicationRequestDTO request) {
+		return applicantService.createApplicantWithApplication(request);
 	}
 	
 	@DeleteMapping("/remove/{email}")
-	public void deleteApplicant(@PathVariable String email) {
-	
+	public String deleteApplicant(@PathVariable String email) {
+		return applicantService.removeApplicant(email);
 	}
 }

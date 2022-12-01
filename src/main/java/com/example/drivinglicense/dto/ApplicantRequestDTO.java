@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import lombok.Data;
 
 @Data
-public class ApplicantDTO {
+public class ApplicantRequestDTO {
 	private String firstName;
 	private String lastName;
 	private String email;

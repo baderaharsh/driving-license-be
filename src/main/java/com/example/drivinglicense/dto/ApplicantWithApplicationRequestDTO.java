@@ -11,6 +11,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ApplicantWithApplicationDTO {
+public class ApplicantWithApplicationRequestDTO {
 	private Applicant applicant;
 }

@@ -1,10 +1,10 @@
 package com.example.drivinglicense.mapper;
 
-import com.example.drivinglicense.dto.ApplicantDTO;
+import com.example.drivinglicense.dto.ApplicantRequestDTO;
 import com.example.drivinglicense.model.Applicant;
 
 public class UpdateApplicant {
-	public static Applicant getApplicant(Applicant applicant,ApplicantDTO applicantDTO) {
+	public static Applicant getApplicant(Applicant applicant,ApplicantRequestDTO applicantDTO) {
 
         if ( applicantDTO.getDob() != null ) {
             applicant.setDob( applicantDTO.getDob() );
