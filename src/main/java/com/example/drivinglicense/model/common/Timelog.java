@@ -8,6 +8,9 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Data;
+
+@Data
 @MappedSuperclass
 public class Timelog {
 	
@@ -19,10 +22,6 @@ public class Timelog {
 	@Column(name = "last_updated_on")
 	private LocalDateTime lastUpdatedOn;
 	
-	@Column(name = "is_active")
-	private boolean isActive;
-	
-	public Timelog(){
-		this.isActive = true;
-	}
+	@Column(name = "active")
+	private boolean active;
 }

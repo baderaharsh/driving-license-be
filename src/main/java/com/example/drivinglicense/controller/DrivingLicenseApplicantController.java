@@ -18,6 +18,9 @@ import com.example.drivinglicense.dto.ApplicantWithApplicationRequestDTO;
 import com.example.drivinglicense.dto.ApplicantWithApplicationResponseDTO;
 import com.example.drivinglicense.service.ApplicantService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @RestController
 @RequestMapping("/applicant")
 public class DrivingLicenseApplicantController {
@@ -27,13 +30,15 @@ public class DrivingLicenseApplicantController {
 	
 	//Get last n created users
 	@GetMapping()
-	public List<ApplicantRequestDTO> getApplicants(Integer n){
+	public List<ApplicantResponseDTO> getApplicants(@PathVariable Integer n){
+		log.info("Value of n is ", n);
 		return null;
 	}
 	
 	//Get user using their email
 	@GetMapping("/{email}")
-	public Object getApplicant(@PathVariable String email) {
+	public ApplicantResponseDTO getApplicant(@PathVariable String email) {
+		log.info("GET /applicant/ ", email);
 		return applicantService.getApplicant(email);
 	}
 	
@@ -44,7 +49,7 @@ public class DrivingLicenseApplicantController {
 	}
 	
 	//Update applicant
-	@PatchMapping("/update-applincat")
+	@PatchMapping("/update-applicant")
 	public ApplicantResponseDTO updateApplicant(@RequestBody ApplicantRequestDTO applicantDTO) {
 		return applicantService.updateApplicant(applicantDTO);
 		

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(content = Include.NON_NULL)
 public class ApplicantResponseDTO {
 	ApplicantResponse applicant;
 	ResponseError error;

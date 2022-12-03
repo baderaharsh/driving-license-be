@@ -15,7 +15,6 @@ import com.example.drivinglicense.dto.ApplicantWithApplicationRequestDTO;
 import com.example.drivinglicense.dto.ApplicantWithApplicationResponseDTO;
 import com.example.drivinglicense.mapper.ApplicantMapper;
 import com.example.drivinglicense.model.Applicant;
-import com.example.drivinglicense.model.RequestDTO;
 import com.example.drivinglicense.repository.ApplicantRepository;
 import com.example.drivinglicense.repository.ApplicationRepository;
 
@@ -47,11 +46,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 			
 			Optional<Applicant> applicant = findApplicant(email);
 			
-			if(!applicant.isEmpty()) {
-				return applicantMapper.getErrorResponse(errors.emailAlreadyExist());
+			if(applicant.isEmpty() || !applicant.get().isActive()) {
+				return applicantMapper.getErrorResponse(errors.applicantNotFound());
 			} else {
-				
-//				return applicantMapper.get
+				return applicantMapper.getApplicantResponseDTO(applicant.get());
 			}
 		} catch (Exception ex) {
 			log.error("Something went wrong!");
@@ -66,35 +64,47 @@ public class ApplicantServiceImpl implements ApplicantService {
 		try {
 
 			if (!findApplicant(applicantDTO.getEmail()).isEmpty()) {
-				return null;
+				return applicantMapper.getErrorResponse(errors.emailAlreadyUsed());
 			}
 
 			Applicant applicant = applicantMapper.getApplicant(applicantDTO);
 
 			applicantRepository.save(applicant);
 			
-			return null;
+			return applicantMapper.getApplicantResponseDTO(applicant);
 
 		} catch (Exception e) {
 
-			return null;
+			log.error("Exception occured while creating applicant");
 
 		}
+		
+		return null;
 	}
 	
 	@Override
 	public ApplicantResponseDTO updateApplicant(ApplicantRequestDTO applicantDTO) {
 
-		ApplicantMapper mapper = Mappers.getMapper(ApplicantMapper.class);
+		try {
+			
+			Optional<Applicant> applicantToBeUpdated = findApplicant(applicantDTO.getEmail());
 
-//		Applicant currentApplicant = applicantRepository.getByEmail(applicantDTO.getEmail());
-//
-//		Applicant newApplicant = UpdateApplicant.getApplicant(currentApplicant, applicantDTO);
-//
-//		Applicant updatedApplicant = applicantRepository.save(newApplicant);
-//
-//		return mapper.getApplicantDTO(updatedApplicant);
+			if (applicantToBeUpdated.isEmpty() || !applicantToBeUpdated.get().isActive()) {
+				return applicantMapper.getErrorResponse(errors.applicantNotFound());
+			}
 
+			Applicant applicant = applicantMapper.getUpdatedApplicant(applicantToBeUpdated.get(), applicantDTO);
+
+			applicantRepository.save(applicant);
+			
+			return applicantMapper.getApplicantResponseDTO(applicant);
+
+		} catch (Exception e) {
+
+			log.error("Exception occured while creating applicant");
+
+		}
+		
 		return null;
 	}
 	
@@ -105,6 +115,23 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 	@Override
 	public String removeApplicant(String email) {
+		
+		try {
+			
+			Optional<Applicant> applicant = findApplicant(email);
+			
+			if(applicant.isEmpty()) {
+				return errors.applicantNotFound().getMessage();
+			} else {
+				applicant.get().setActive(false);
+			}
+			
+		} catch (Exception e) {
+
+			log.error("Exception occured while creating applicant");
+
+		}
+		
 		return null;
 	}
 

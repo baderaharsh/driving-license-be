@@ -10,7 +10,11 @@ public class CustomErrors {
 	private String code;
 	private String message;
 	
-	public final ResponseError emailAlreadyExist() {
-		return new ResponseError("BAD REQUEST","Email already exists");
+	public final ResponseError emailAlreadyUsed() {
+		return new ResponseError("BAD REQUEST","Email is already used");
+	}
+	
+	public final ResponseError applicantNotFound() {
+		return new ResponseError("BAD REQUEST", "Applicant not found");
 	}
 }
