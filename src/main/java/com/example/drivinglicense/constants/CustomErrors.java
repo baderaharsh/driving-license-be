@@ -7,14 +7,15 @@ import com.example.drivinglicense.dto.ResponseError;
 @Component
 public class CustomErrors {
 	
-	private String code;
-	private String message;
-	
 	public final ResponseError emailAlreadyUsed() {
-		return new ResponseError("BAD REQUEST","Email is already used");
+		return new ResponseError("EMAIL_ALREADY_EXIST","Email is already used");
 	}
 	
 	public final ResponseError applicantNotFound() {
-		return new ResponseError("BAD REQUEST", "Applicant not found");
+		return new ResponseError("APPLICANT_NOT_FOUND", "Applicant not found");
+	}
+	
+	public final ResponseError applicationNotFound() {
+		return new ResponseError("APPLICATION_NOT_FOUND", "Application not found");
 	}
 }

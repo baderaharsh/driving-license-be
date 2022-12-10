@@ -29,16 +29,17 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "application_number")
+	private String applicationNumber;
+	
 	@Column(name="status")
 	private String status;
 	
-	@CreationTimestamp
-	@Column(name="submitted_on")
-	private LocalDateTime submittedOn;
+	@Column(name = "type")
+	private String type;
 	
-	@UpdateTimestamp
-	@Column(name="last_updated")
-	private LocalDateTime lastUpdated;
+	@Column(name = "category")
+	private String category;
 	
 	@Column(name = "deleted")
 	private boolean deleted;
@@ -46,5 +47,13 @@ public class Application {
 	@ManyToOne
 	@JoinColumn(name = "applicant_id")
 	private Applicant applicant;
+	
+	@CreationTimestamp
+	@Column(name="submitted_on")
+	private LocalDateTime submittedOn;
+	
+	@UpdateTimestamp
+	@Column(name="last_updated")
+	private LocalDateTime lastUpdatedOn;
 	
 }
