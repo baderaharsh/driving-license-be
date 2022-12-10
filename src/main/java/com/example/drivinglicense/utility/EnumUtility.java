@@ -1,8 +1,11 @@
 package com.example.drivinglicense.utility;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class EnumUtility {
 	
-	enum Type {
+	public static enum Type {
 		CAR("CA"),
 		BIKE("BI"),
 		CARBIKE("CB"),
@@ -19,7 +22,7 @@ public class EnumUtility {
 		}
 	}
 	
-	enum Category {
+	public static enum Category {
 		PRIVATE("PV"),
 		PUBLIC("PB"),
 		TRANSPORT("TR"),
@@ -33,6 +36,24 @@ public class EnumUtility {
 		
 		public String getCategory() {
 			return category;
+		}
+	}
+	
+	public static enum Status {
+		SUBMITTED("Submitted"),
+		UNDERREVIEW("Under review"),
+		APPROVED("Approved"),
+		DISPATCHED("Dispatched"),
+		DELIVERED("Delivered");
+		
+		private String status;
+		
+		private Status(String status) {
+			this.status = status;
+		}
+		
+		public String getStatus() {
+			return status;
 		}
 	}
 }
