@@ -5,4 +5,5 @@ import com.example.drivinglicense.dto.ApplicationResponse;
 
 public interface ApplicationService {
 	public ApplicationResponse createApplication(ApplicationRequestDTO application);
+	public ApplicationResponse getApplication(String email);
 }

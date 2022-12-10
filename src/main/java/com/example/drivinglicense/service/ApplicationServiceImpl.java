@@ -28,10 +28,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired
 	CustomErrors errors;
 	
+	private final ApplicationMapper applicationMapper = Mappers.getMapper(ApplicationMapper.class);
+	
 	@Override
 	public ApplicationResponse createApplication(ApplicationRequestDTO request) {
-		
-		ApplicationMapper applicationMapper = Mappers.getMapper(ApplicationMapper.class);
 		
 		Application newApplication = applicationMapper.getApplication(request, EnumUtility.Status.SUBMITTED.getStatus());
 		
@@ -54,6 +54,18 @@ public class ApplicationServiceImpl implements ApplicationService {
 		application = applicationRepository.save(application);
 		
 		return applicationMapper.getApplicationResponse(application);
+	}
+	
+	@Override
+	public ApplicationResponse getApplication(String email) {
+		
+		Optional<Application> application = applicationRepository.getApplicationByEmail(email);
+		
+		if(application.isEmpty()) {
+			return applicationMapper.getApplicationErrorResponse(errors.applicationNotFound());
+		}
+		
+		return applicationMapper.getApplicationResponse(application.get());
 	}
 
 }

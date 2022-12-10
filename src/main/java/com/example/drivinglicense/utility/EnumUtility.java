@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EnumUtility {
 	
-	public static enum Type {
+	public enum Type {
 		CAR("CA"),
 		BIKE("BI"),
 		CARBIKE("CB"),
@@ -22,7 +22,7 @@ public class EnumUtility {
 		}
 	}
 	
-	public static enum Category {
+	public enum Category {
 		PRIVATE("PV"),
 		PUBLIC("PB"),
 		TRANSPORT("TR"),
@@ -39,7 +39,7 @@ public class EnumUtility {
 		}
 	}
 	
-	public static enum Status {
+	public enum Status {
 		SUBMITTED("Submitted"),
 		UNDERREVIEW("Under review"),
 		APPROVED("Approved"),
