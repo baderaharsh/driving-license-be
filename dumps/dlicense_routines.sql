@@ -18,27 +18,12 @@ USE `dlicense`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `applicant`
+-- Dumping events for database 'dlicense'
 --
 
-DROP TABLE IF EXISTS `applicant`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `applicant` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(15) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
-  `phone` bigint DEFAULT NULL,
-  `email` varchar(30) NOT NULL,
-  `dob` datetime NOT NULL,
-  `document_type` varchar(30) DEFAULT NULL,
-  `document_number` varchar(45) DEFAULT NULL,
-  `created_on` datetime NOT NULL,
-  `last_updated_on` datetime DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+-- Dumping routines for database 'dlicense'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

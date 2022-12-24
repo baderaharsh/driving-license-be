@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.drivinglicense.dto.ApplicationRequestDTO;
-import com.example.drivinglicense.dto.ApplicationResponse;
+import com.example.drivinglicense.dto.ApplicationResponseDTO;
 import com.example.drivinglicense.service.ApplicationService;
 
 @RestController
@@ -25,7 +25,7 @@ public class DrivingLicenseApplicationController {
 	}
 	
 	@GetMapping
-	public ApplicationResponse getApplication(@RequestParam String email) {
+	public ApplicationResponseDTO getApplication(@RequestParam String email) {
 		return applicationService.getApplication(email);
 	}
 }
