@@ -11,4 +11,5 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
 	Optional<Applicant> findByEmail(String email);
 	Applicant findByFirstNameAndPhoneAndEmail(String firstName, Long phone, String email);
 	List<Applicant> findByDocumentNumberOrDocumentNumber(String documentNumber, String docNum);
+	Optional<Applicant> findByPhoneAndActive(Long phone, boolean active);
 }

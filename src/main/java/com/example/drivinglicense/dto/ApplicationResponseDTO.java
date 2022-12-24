@@ -10,11 +10,12 @@ import lombok.Data;
 @SuppressWarnings("deprecation")
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class ApplicationResponse {
+public class ApplicationResponseDTO {
 	private String applicationNumber;
 	private String type;
 	private String category;
 	private String status;
 	private LocalDateTime submittedOn;
 	private LocalDateTime lastUpdatedOn;
+	private ResponseError error;
 }

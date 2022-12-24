@@ -6,6 +6,7 @@ import org.mapstruct.Mappings;
 
 import com.example.drivinglicense.dto.ApplicationRequestDTO;
 import com.example.drivinglicense.dto.ApplicationResponse;
+import com.example.drivinglicense.dto.ApplicationResponseDTO;
 import com.example.drivinglicense.dto.ResponseError;
 import com.example.drivinglicense.model.Application;
 
@@ -19,6 +20,6 @@ public interface ApplicationMapper {
 	})
 	Application getApplication(ApplicationRequestDTO application, String status);
 	@Mapping(target = "error", source = "error")
-	ApplicationResponse getApplicationErrorResponse(ResponseError error);
-	ApplicationResponse getApplicationResponse(Application application);
+	ApplicationResponseDTO getApplicationErrorResponse(ResponseError error);
+	ApplicationResponseDTO getApplicationResponse(Application application);
 }

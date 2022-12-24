@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.drivinglicense.dto.ApplicantRequestDTO;
@@ -30,39 +31,37 @@ public class DrivingLicenseApplicantController {
 	
 	//Get last n created users
 	@GetMapping()
-	public List<ApplicantResponseDTO> getApplicants(@PathVariable Integer n){
-		log.info("Value of n is ", n);
+	public List<ApplicantResponseDTO> getApplicants(@RequestParam Integer latest){
+		log.info("Requested last " + latest +  " records");
+		log.warn("Under construction");
 		return null;
 	}
 	
 	//Get user using their email
 	@GetMapping("/{email}")
 	public ApplicantResponseDTO getApplicant(@PathVariable String email) {
-		log.info("GET /applicant/ ", email);
+		log.info("GET /applicant/" + email);
 		return applicantService.getApplicant(email);
 	}
 	
 	//Create applicant
 	@PostMapping()
-	public ApplicantResponseDTO createApplicant(@RequestBody ApplicantRequestDTO applicantDTO) {
-		return applicantService.createApplicant(applicantDTO);
+	public ApplicantWithApplicationResponseDTO createApplicant(@RequestBody ApplicantWithApplicationRequestDTO request) {
+		log.info("POST /applicant " + request);
+		return applicantService.createApplicant(request);
 	}
 	
 	//Update applicant
 	@PatchMapping("/update-applicant")
-	public ApplicantResponseDTO updateApplicant(@RequestBody ApplicantRequestDTO applicantDTO) {
-		return applicantService.updateApplicant(applicantDTO);
+	public ApplicantResponseDTO updateApplicant(@RequestBody ApplicantRequestDTO request) {
+		log.info("PATCH /update-applicant " + request);
+		return applicantService.updateApplicant(request);
 		
-	}
-	
-	//Create application for applicant
-	@PostMapping("/applicant/application")
-	public ApplicantWithApplicationResponseDTO submitApplicantWithApplication(@RequestBody ApplicantWithApplicationRequestDTO request) {
-		return applicantService.createApplicantWithApplication(request);
 	}
 	
 	@DeleteMapping("/remove/{email}")
 	public String deleteApplicant(@PathVariable String email) {
+		log.info("DELETE /remove/ " + email);
 		return applicantService.removeApplicant(email);
 	}
 }

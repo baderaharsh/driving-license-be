@@ -24,4 +24,8 @@ public class Timelog {
 	
 	@Column(name = "active")
 	private boolean active;
+	
+	public Timelog() {
+		active = true;
+	}
 }

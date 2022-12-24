@@ -55,5 +55,4 @@ public class Application {
 	@UpdateTimestamp
 	@Column(name="last_updated")
 	private LocalDateTime lastUpdatedOn;
-	
 }

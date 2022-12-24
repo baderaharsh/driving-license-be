@@ -1,9 +1,9 @@
 package com.example.drivinglicense.service;
 
 import com.example.drivinglicense.dto.ApplicationRequestDTO;
-import com.example.drivinglicense.dto.ApplicationResponse;
+import com.example.drivinglicense.dto.ApplicationResponseDTO;
 
 public interface ApplicationService {
-	public ApplicationResponse createApplication(ApplicationRequestDTO application);
-	public ApplicationResponse getApplication(String email);
+	public ApplicationResponseDTO createApplication(ApplicationRequestDTO application);
+	public ApplicationResponseDTO getApplication(String email);
 }

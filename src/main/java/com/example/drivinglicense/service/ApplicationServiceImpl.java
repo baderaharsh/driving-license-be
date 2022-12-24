@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.drivinglicense.constants.CustomErrors;
 import com.example.drivinglicense.dto.ApplicationRequestDTO;
-import com.example.drivinglicense.dto.ApplicationResponse;
+import com.example.drivinglicense.dto.ApplicationResponseDTO;
 import com.example.drivinglicense.mapper.ApplicationMapper;
 import com.example.drivinglicense.model.Applicant;
 import com.example.drivinglicense.model.Application;
@@ -31,13 +31,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 	private final ApplicationMapper applicationMapper = Mappers.getMapper(ApplicationMapper.class);
 	
 	@Override
-	public ApplicationResponse createApplication(ApplicationRequestDTO request) {
+	public ApplicationResponseDTO createApplication(ApplicationRequestDTO request) {
+		
+		System.out.println("Create application is triggered");
 		
 		Application newApplication = applicationMapper.getApplication(request, EnumUtility.Status.SUBMITTED.getStatus());
 		
 		Optional<Applicant> applicant = applicantRepository.findByEmail(request.getApplicantEmail());
 		
 		if(applicant.isEmpty()) {
+			System.out.println("Applicant is null");
 			return applicationMapper.getApplicationErrorResponse(errors.applicantNotFound());
 		}
 		
@@ -51,13 +54,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 		
 		application.setApplicationNumber(applicationNumber);
 		
+		System.out.println("Saving application");
+		
 		application = applicationRepository.save(application);
 		
 		return applicationMapper.getApplicationResponse(application);
 	}
 	
 	@Override
-	public ApplicationResponse getApplication(String email) {
+	public ApplicationResponseDTO getApplication(String email) {
 		
 		Optional<Application> application = applicationRepository.getApplicationByEmail(email);
 		
